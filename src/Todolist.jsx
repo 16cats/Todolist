@@ -1,62 +1,59 @@
 import { useState } from "react";
-import TodoTable from "./TodoTable";
+import './App.css'
+import TodoTable from "./components/TodoTable";
+import TodoGrid from "./components/TodoGrid"
 
-export default function Todolist() {
+function Todolist() {
     // state
     const [todos, setTodos] = useState([]);
-    const [todo, setTodo] = useState('');
-    const [date, setDate] = useState('');
+    const [todo, setTodo] = useState({ target: '', description: '' });
 
-    // function to handle input changes for description
-    const handleDescriptionInputChange = (e) => {
-        setTodo(e.target.value);
+    // function to handle input changes for todo
+    const inputChanged = (event) => {
+        setTodo({ ...todo, [event.target.name]: event.target.value });
+
     }
 
-    // function to handle input changes for date
-    const handleDateInputChange = (e) => {
-        setDate(e.target.value);
-    }
-    
     // function to add a todo
-    const addTodo = () => {
-        if (todo.trim() !== '' && date.trim() !== '') {
-            setTodos([...todos, { description: todo, date: date }]);
-            setTodo('');
-            setDate('');
-        }
+    const addTodo = (event) => {
+        event.preventDefault();
+        console.log("insert new todo to matkat array");
+        setTodos([...todos, todo]);
     }
-    
+
     //delete
     const deleteByIndex = (index) => {
         console.log(index);
         setTodos(todos.filter((todo, i) => i !== index));
-      }
+    }
 
     return (
         <>
-            <h1>Todolist</h1>
-            <div>
-                <input
-                    type="text"
-                    name="description"
-                    placeholder="Description"
-                    value={todo}
-                    onChange={handleDescriptionInputChange}
-                />
-                <input
-                    type="text"
-                    name="date"
-                    placeholder="Date"
-                    value={date}
-                    onChange={handleDateInputChange}
-                />
-                <button onClick={addTodo}>
-                    Add
-                </button>
-                
-            </div>
-            
-            <TodoTable todos={todos} onDelete={deleteByIndex}/>
+            <form onSubmit={addTodo}>
+                <p> <label>Todo list </label>
+                    <input
+                        type="text"
+                        name="target"
+                        value={todo.target}
+                        onChange={inputChanged} /></p>
+                <p><label>Description </label>
+                    <input
+                        type="text"
+                        name="description"
+                        placeholder="description"
+                        value={todo.description}
+                        onChange={inputChanged} /></p>
+                <input type="submit" value="Lisää" />
+
+            </form>
+
+            <TodoGrid
+            places={todos}
+            deleteByIndex = {deleteByIndex}
+            />
+
         </>
-    );
+    )
 }
+
+//            <TodoTable todos={todos} onDelete={deleteByIndex} />
