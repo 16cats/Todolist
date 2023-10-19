@@ -1,10 +1,30 @@
 import './App.css'
+import { useState } from "react";
 import Todolist from './Todolist'
+import Home from './components/Home'
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 
 export default function App() {
+
+  const [value, setValue] = useState('Home');
+
+  const handleChange = (event, value) => {
+    console.log("aaa")
+    setValue(value);
+
+  }
   return (
-    <Todolist />
+    <div>
+      <Tabs value={value} onChange={handleChange}>
+        <Tab value="Home" label="Home" />
+        <Tab value="Todos" label="Add Todo" />
+      </Tabs>
+      {value === 'Home' && <Home/>}
+      {value === 'Todos' && <Todolist/>}
+
+    </div>
   )
 }
 

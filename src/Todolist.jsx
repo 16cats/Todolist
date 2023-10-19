@@ -48,7 +48,7 @@ function Todolist() {
           <DatePicker
             label="Date"
             value={todo.date}
-            onChange={dateChanged}
+            onChange={date => dateChanged(date)}
           />
         </LocalizationProvider>
 
