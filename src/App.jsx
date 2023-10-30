@@ -5,13 +5,12 @@ import Home from './components/Home'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-
 export default function App() {
 
   const [value, setValue] = useState('Home');
 
   const handleChange = (event, value) => {
-    console.log("aaa")
+    console.log("Works for me!")
     setValue(value);
 
   }

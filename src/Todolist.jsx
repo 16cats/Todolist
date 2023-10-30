@@ -20,7 +20,12 @@ function Todolist() {
 
     const addTodo = (event) => {
         setTodos([...todos, todo]);
-        setTodo({ description: '', date: '', priority: '' }); // Reset input fields
+        setTodo({ description: '', date: null, priority: '' }); // Reset input fields
+    }
+
+    const clearAll = () => {
+      console.log("clear all");
+      setTodos([]);
     }
 
     const deleteByIndex = (index) => {
@@ -46,9 +51,9 @@ function Todolist() {
     
           <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-            label="Date"
+            label="Deadline"
             value={todo.date}
-            onChange={date => dateChanged(date)}
+            onChange={dateChanged}
           />
         </LocalizationProvider>
 
@@ -69,6 +74,7 @@ function Todolist() {
             <TodoGrid
                 todos={todos} deleteByIndex={deleteByIndex}
             />
+            <button onClick={clearAll}>Clear All</button>
         </>
     );
 }

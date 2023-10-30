@@ -22,7 +22,7 @@ export default function TodoGrid(props) {
         },
 
     ]
-
+ 
     const deleteSelected = () => {
         //alert('En osaa vielä poistaa todota')
         if (gridRef.current.getSelectedNodes().length > 0) {
@@ -53,5 +53,3 @@ export default function TodoGrid(props) {
         </>
     )
 }
-
-
